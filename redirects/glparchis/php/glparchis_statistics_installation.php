@@ -62,12 +62,28 @@ echo "</ul>";
 echo "<ul>";
 $cur=$mysqli->query("SELECT count(*) from games where maxplayers=3 and ends is not null and installations_uuid='$installations_uuid'");$row= $cur->fetch_row();
 echo "<li>Number of games finished in 3 players mode: " .$row[0]."</li>";
+$totalended3=$row[0];
 $cur=$mysqli->query("SELECT count(*) from games where maxplayers=4 and ends is not null and installations_uuid='$installations_uuid'");$row= $cur->fetch_row();
 echo "<li>Number of games finished in 4 players mode: " .$row[0]."</li>";
+$totalended4=$row[0];
 $cur=$mysqli->query("SELECT count(*) from games where maxplayers=6 and ends is not null and installations_uuid='$installations_uuid'");$row= $cur->fetch_row();
 echo "<li>Number of games finished in 6 players mode: " .$row[0]."</li>";
+$totalended6=$row[0];
 $cur=$mysqli->query("SELECT count(*) from games where maxplayers=8 and ends is not null and installations_uuid='$installations_uuid'");$row= $cur->fetch_row();
 echo "<li>Number of games finished in 8 players mode: " .$row[0]."</li>";
+$totalended8=$row[0];
+echo "</ul>";
+
+
+echo "<ul>";
+$cur=$mysqli->query("SELECT avg(timestampdiff(MINUTE,starts,ends)) from games where maxplayers=3 and installations_uuid='$installations_uuid'");$row= $cur->fetch_row();
+echo "<li>Average minutes to end a 3 players game: " .$row[0]."</li>";
+$cur=$mysqli->query("SELECT avg(timestampdiff(MINUTE,starts,ends)) from games where maxplayers=4 and installations_uuid='$installations_uuid'");$row= $cur->fetch_row();
+echo "<li>Average minutes to end a 4 players game: " .$row[0]."</li>";
+$cur=$mysqli->query("SELECT avg(timestampdiff(MINUTE,starts,ends)) from games where maxplayers=6 and installations_uuid='$installations_uuid'");$row= $cur->fetch_row();
+echo "<li>Average minutes to end a 6 players game: " .$row[0]."</li>";
+$cur=$mysqli->query("SELECT avg(timestampdiff(MINUTE,starts,ends)) from games where maxplayers=8 and installations_uuid='$installations_uuid'");$row= $cur->fetch_row();
+echo "<li>Average minutes to end a 8 players game: " .$row[0]."</li>";
 echo "</ul>";
 
 
@@ -81,18 +97,6 @@ echo "<li>Median minutes to end a 6 players game: " .$row[0]."</li>";
 $cur=$mysqli->query("SELECT timestampdiff(SECOND,starts,ends)/60 as duration from games where maxplayers=8 and ends is not null and installations_uuid='$installations_uuid' order by duration limit " . (ceil($totalended8/2) - 1) . ", 1");$row=$cur->fetch_row();
 echo "<li>Median minutes to end a 8 players game: " .$row[0]."</li>";
 echo "</ul>";
-
-echo "<ul>";
-$cur=$mysqli->query("SELECT avg(timestampdiff(MINUTE,starts,ends)) from games where maxplayers=3 and installations_uuid='$installations_uuid'");$row= $cur->fetch_row();
-echo "<li>Average minutes to end a 3 players game: " .$row[0]."</li>";
-$cur=$mysqli->query("SELECT avg(timestampdiff(MINUTE,starts,ends)) from games where maxplayers=4 and installations_uuid='$installations_uuid'");$row= $cur->fetch_row();
-echo "<li>Average minutes to end a 4 players game: " .$row[0]."</li>";
-$cur=$mysqli->query("SELECT avg(timestampdiff(MINUTE,starts,ends)) from games where maxplayers=6 and installations_uuid='$installations_uuid'");$row= $cur->fetch_row();
-echo "<li>Average minutes to end a 6 players game: " .$row[0]."</li>";
-$cur=$mysqli->query("SELECT avg(timestampdiff(MINUTE,starts,ends)) from games where maxplayers=8 and installations_uuid='$installations_uuid'");$row= $cur->fetch_row();
-echo "<li>Average minutes to end a 8 players game: " .$row[0]."</li>";
-echo "</ul>";
-
 
 echo "<h1>Victories</h1>";
 echo "<ul>";
