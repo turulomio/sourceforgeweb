@@ -1,3 +1,0 @@
-20120915 En download glparchis poner o si bien ve directamente a la pagina de descargas de Sourceforge
-20130320 El portage apunta a url antigua de sourceforge
-20180814 meter el args.output dentro de Pages y SVG
