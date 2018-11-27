@@ -31,7 +31,7 @@ msgid "Todos mis proyectos de código abierto los puedes encontrar en el <a href
 msgstr ""
 
 msgid "De entre ellos destacan:"
-msgstr ""
+msgstr "The most important:"
 
 msgid "También participo o he participado en otros proyectos como:"
 msgstr "I'm involved or I've been involved in other projects like:"

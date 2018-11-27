@@ -107,7 +107,7 @@ class SetPages:
     def write(self):
         self.Index()
         self.QuienSoy()
-        self.Proyectos()
+#        self.Proyectos()
 
     def Index(self):
         self.pagina_proyectos("index.html")
@@ -1191,7 +1191,6 @@ class Page:
         s=s+'      <ul id="menu-list">\n'
         s=s+'         <li><a href="index.html">'+_('Inicio')+'</a></li>\n'
         s=s+'         <li><a href="quiensoy.html">'+_('¿Quién soy?')+'</a></li>\n'
-        s=s+'         <li><a href="proyectos.html">'+_('Mis proyectos')+'</a></li>\n'
         s=s+'      </ul>\n'
         s=s+'   </div>\n'
         s=s+'</div>\n'
@@ -1246,9 +1245,7 @@ def generate_myweb(output, language):
     print(_("  - Página generada con idioma '{}'").format(language))
 
 
-    projects=SetProjects(output, language)
-    projects.write()
-    pages=SetPages(output, language, projects)
+    pages=SetPages(output, language, None)
     pages.write()
     redirect_index_html(output)
 
