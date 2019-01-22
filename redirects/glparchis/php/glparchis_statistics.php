@@ -78,18 +78,18 @@ echo "<li>Median minutes to end a 8 players game: " .$row[0]."</li>";
 echo "</ul>";
 
 echo "<h2>Top players</h2>";
-$cur=$mysqli->query("SELECT count(*), installations_uuid FROM games group by installations_uuid order by count(*) desc limit 10");
+$cur=$mysqli->query("SELECT count(*), installations_uuid, date(datetime) as date FROM games, installations where games.installations_uuid=installations.uuid  group by installations_uuid, datetime order by count(*) desc limit 10");
 echo "<ul>";
 while($row = $cur->fetch_array()) {
-    echo "<li>" . $row[0] . " games played in installation: " . $row[1] . "</li>";
+    echo "<li>" . $row[0] . " games played in installation since " . $row[2] . ": " . $row[1] . "</li>";
 }
 echo "</ul>";
 
 echo "<h2>Top players in the last 30 days</h2>";
-$cur=$mysqli->query("SELECT count(*), installations_uuid FROM games  where starts>=DATE(NOW()) - INTERVAL 30 DAY group by installations_uuid order by count(*) desc limit 10");
+$cur=$mysqli->query("SELECT count(*), installations_uuid, date(datetime) as date FROM games, installations where games.installations_uuid=installations.uuid and starts>=DATE(NOW()) - INTERVAL 30 DAY group by installations_uuid, datetime order by count(*) desc limit 10 ");
 echo "<ul>";
 while($row = $cur->fetch_array()) {
-    echo "<li>" . $row[0] . " games played in installation: " . $row[1] . "</li>";
+    echo "<li>" . $row[0] . " games played in installation created at " . $row[2] . ": " . $row[1] . "</li>";
 }
 echo "</ul>";
 
